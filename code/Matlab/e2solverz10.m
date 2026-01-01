@@ -3300,9 +3300,13 @@ function [options,show_state,show_index,tree,treesize]=AI_main(filter_options,ba
         tree=treeAI;
         treesize=treesizeAI;
         [options,show_state,show_index]=force_to_options(options,baseline_options,show_state,show_index);
-        for t=1:256
-            if show_state(t)==0
-                options(t,:)=0;  %remove empty content, so we can count the benefit
+        
+        remove_multiple_answers=false;
+        if remove_multiple_answers
+            for t=1:256
+                if show_state(t)==0
+                    options(t,:)=0;  %remove empty content, so we can count the benefit
+                end
             end
         end
 
