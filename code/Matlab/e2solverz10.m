@@ -2503,8 +2503,8 @@ function [result_options,result_show_state,result_show_index]=options_from_folde
                     ttemp_show_state=1*(imglin==1);
                     ttemp_show_index=zeros(size(ttemp_show_state));
                     for ttemp_indlocation=1:256
-                        if show_state(ttemp_indlocation)==1
-                            show_index(ttemp_indlocation)=min(indf(options(ttemp_indlocation,:)>0));
+                        if ttemp_show_state(ttemp_indlocation)==1
+                            ttemp_show_index(ttemp_indlocation)=min(indf(options(ttemp_indlocation,:)>0));
                         end
                     end
                     [options,~,~]=force_to_options(options,baseline_options,ttemp_show_state,ttemp_show_index);
@@ -3121,8 +3121,8 @@ function [options,show_state,show_index,tree,treesize]=AI_main(filter_options,ba
                         ttemp_show_state=1*(imglin==1);
                         ttemp_show_index=zeros(size(ttemp_show_state));
                         for ttemp_indlocation=1:256
-                            if show_state(ttemp_indlocation)==1
-                                show_index(ttemp_indlocation)=min(indf(options(ttemp_indlocation,:)>0));
+                            if ttemp_show_state(ttemp_indlocation)==1
+                                ttemp_show_index(ttemp_indlocation)=min(indf(options(ttemp_indlocation,:)>0));
                             end
                         end
                         [options,~,~]=force_to_options(options,baseline_options,ttemp_show_state,ttemp_show_index);
@@ -3300,7 +3300,7 @@ function [options,show_state,show_index,tree,treesize]=AI_main(filter_options,ba
         tree=treeAI;
         treesize=treesizeAI;
         [options,show_state,show_index]=force_to_options(options,baseline_options,show_state,show_index);
-        
+
         remove_multiple_answers=false;
         if remove_multiple_answers
             for t=1:256
