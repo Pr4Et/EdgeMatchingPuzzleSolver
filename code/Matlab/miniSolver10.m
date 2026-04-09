@@ -16,9 +16,11 @@ bS=bW*bW;%size of board
 b4S=bS*4;
 payquest=input('Use DWAVE paid subscription (1) or simulation (0): ');
 quantum_computation_paid=logical(payquest);
-if payquest==1
+if quantum_computation_paid
     payquestQPU=input('Fit to quantum processor unit (1) or use hybrid solver (0): ');
     use_only_QPU=logical(payquestQPU);
+else
+    use_only_QPU=false;
 end
 
 

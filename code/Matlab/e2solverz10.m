@@ -232,7 +232,7 @@ if clue_string(4)=='1'
     options(tempv(tempv~=location(3,3)),indexv)=0;
 end
 
-if planv~=3
+if  planv~=3 %%%%%%%%%%%%%%%%%%%%%%%%  planv~=3
     index=whichisClue(knowncenter,original);
     options(location(9,8),:)=0;
     options(location(9,8),index)=1;
@@ -4932,7 +4932,7 @@ function [options,show_state,show_index,parallelstate]=choose_CornersNN(options,
     end
     parfor stepfor=1:parallelForce
         score=0;
-        posof_choices=ones(maxpos,1);
+        tposof_choices=ones(maxpos,1);
 
         for configno=stepfor:parallelForce:number_of_config
             for topos=1:maxpos
@@ -4941,17 +4941,17 @@ function [options,show_state,show_index,parallelstate]=choose_CornersNN(options,
                 for tt=1:topos-1
                     divideby=divideby*count_choices(tt);
                 end
-                posof_choices(topos)=mod(floor((configno-1)/divideby),modulus)+1;
+                tposof_choices(topos)=mod(floor((configno-1)/divideby),modulus)+1;
             end
             toptions=base_options;
-            ttree=base_tree;
+            
             for posind=1:maxpos
                 row=block_pos(posind,1);
                 col=block_pos(posind,2);
                 ttindlocation=(row-1)*16+col;
                 toptions(ttindlocation,:)=0;
-                toptions(:,shuffled_choices(posind,posof_choices(posind)))=0;
-                toptions(ttindlocation,shuffled_choices(posind,posof_choices(posind)))=1;
+                toptions(:,shuffled_choices(posind,tposof_choices(posind)))=0;
+                toptions(ttindlocation,shuffled_choices(posind,tposof_choices(posind)))=1;
             end
             timglin=sum(toptions>0,2);
             tshow_state=1*(timglin==1);
@@ -4970,7 +4970,7 @@ function [options,show_state,show_index,parallelstate]=choose_CornersNN(options,
             end
         end %for configno
 
-    end %parfor step
+    end %parfor stepfor
     index_scor_vect=1:length(best_score);
     index_scor=min(index_scor_vect(best_score==max(best_score)));
     best_score_final=best_score(index_scor);
